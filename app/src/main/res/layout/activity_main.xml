@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.nsxz.smart.view.MainActivity"
+    android:orientation="vertical">
+
+    <com.nsxz.smart.widget.MSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:textSize="12dp"
+        app:textColor="#ffffff"
+        android:max="8"
+        android:progress="10"
+        app:textBackground="@drawable/icon_thumb"
+        app:textOrientation="top"/>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点击崩溃"/>
+
+</LinearLayout>
