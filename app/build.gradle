@@ -48,6 +48,12 @@ android {
         }
     }
 
+    productFlavors{
+        demo{}
+
+        online{}
+    }
+
 }
 
 walle {
