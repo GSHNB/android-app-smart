@@ -26,8 +26,8 @@ mkdir -p ${root_path}/output/Build_${build_number}
 
 if [ "$build_type" = "Test" ]; then
     echo ${root_path}
-    ${root_path}/gradlew --no-daemon clean assembleDemoRelease -PBUILD_NUMBER=${build_number} || exit -1
-    ${root_path}/gradlew --no-daemon clean assembleOnlineRelease -PBUILD_NUMBER=${build_number} || exit -1
+    ${root_path}/gradlew --no-daemon clean assembleDemoReleaseChannels -PchannelList=官网 -PBUILD_NUMBER=${build_number} || exit -1
+    ${root_path}/gradlew --no-daemon clean assembleOnlineReleaseChannels -PchannelList=官网 -PBUILD_NUMBER=${build_number} || exit -1
 else
     ${root_path}/gradlew --no-daemon clean assembleOnlineReleaseChannels -PBUILD_NUMBER=${build_number} || exit -1
 fi
