@@ -69,7 +69,7 @@ android {
             if (variant.buildType.versionNameSuffix) {
                 version += variant.buildType.versionNameSuffix
             }
-            def dirname = "smart-" + variant.productFlavors[0].name + "-" + variant.buildType.name + "-" + version + "-" + variant.productFlavors[1].name;
+            def dirname = "smart-" + variant.productFlavors[0].name + "-" + variant.buildType.name + "-" + version;
 
             def apkDir = new File(buildOutputDir, dirname)
             output.outputFile = new File(apkDir, dirname + ".apk");
