@@ -3,6 +3,7 @@ package com.nsxz.smart.view;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.nsxz.smart.R;
 
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn)
     public void onViewClicked() {
-        Double.parseDouble(null);
-//        Toast.makeText(this, "bugly修复成功", Toast.LENGTH_SHORT).show();
+//        Double.parseDouble(null);
+        Toast.makeText(this, "bugly修复成功", Toast.LENGTH_SHORT).show();
     }
 }
