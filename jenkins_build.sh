@@ -25,11 +25,19 @@ fi
 mkdir -p ${root_path}/output/Build_${build_number}
 
 if [ "$build_type" = "Test" ]; then
+
     echo ${root_path}
     ${root_path}/gradlew --no-daemon clean assembleDemoReleaseChannels -PchannelList=官网 -PBUILD_NUMBER=${build_number} || exit -1
+    cp -R ${root_path}/app/build/outputs/channels/ ${root_path}/output/Build_${build_number}/testApk
     ${root_path}/gradlew --no-daemon clean assembleOnlineReleaseChannels -PchannelList=官网 -PBUILD_NUMBER=${build_number} || exit -1
+    cp -R ${root_path}/app/build/outputs/channels/ ${root_path}/output/Build_${build_number}/testApk
+
 elif [ "$build_type" = "Release" ];then
+
     ${root_path}/gradlew --no-daemon clean assembleOnlineReleaseChannels -PBUILD_NUMBER=${build_number} || exit -1
+
+elif [ "$build_type" = "Patch" ];then
+    ${root_path}/gradlew --no-daemon clean buildTinkerPatchOnlineRelease || exit -1
 fi
 
 mkdir -p ${root_path}/output/Build_${build_number}/bakApk
