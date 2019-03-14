@@ -27,13 +27,13 @@ mkdir -p ${root_path}/output/Build_${build_number}
 if [ "$build_type" = "Test" ]; then
     echo ${root_path}
     ${root_path}/gradlew --no-daemon clean assembleRelease -PBUILD_NUMBER=${build_number} || exit -1
+    cp -R ${root_path}/app/build/bakApk ${root_path}/output/Build_${build_number}
 elif [ "$build_type" = "Release" ];then
     ${root_path}/gradlew --no-daemon clean assembleOnlineReleaseChannels -PBUILD_NUMBER=${build_number} || exit -1
     cp -R ${root_path}/app/build/outputs/channels ${root_path}/output/Build_${build_number}
+    cp -R ${root_path}/app/build/bakApk ${root_path}/output/Build_${build_number}
 elif [ "$build_type" = "Patch" ];then
     ${root_path}/gradlew --no-daemon clean buildTinkerPatchOnlineRelease || exit -1
     cp -R ${root_path}/app/build/outputs/patch ${root_path}/output/Build_${build_number}
 fi
-
-cp -R ${root_path}/app/build/bakApk ${root_path}/output/Build_${build_number}
 
