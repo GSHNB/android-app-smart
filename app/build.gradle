@@ -54,40 +54,6 @@ android {
         online{}
     }
 
-    android.variantFilter { variant ->
-        if (variant.buildType.name.equals('release') && variant.getFlavors().get(0).name.equals('Demo')) {
-            variant.setIgnore(true);
-        }
-    }
-
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def buildRootDir = buildDir.getParentFile().getParentFile()
-            def buildOutputRootDir = new File(buildRootDir, "output")
-            def buildOutputDir = new File(buildOutputRootDir, "Build_${BUILD_NUMBER}")
-            def version = defaultConfig.versionName;
-            if (variant.buildType.versionNameSuffix) {
-                version += variant.buildType.versionNameSuffix
-            }
-            def dirname = "smart-" + variant.productFlavors[0].name + "-" + variant.buildType.name + "-" + version;
-
-            def apkDir = new File(buildOutputDir, dirname)
-            output.outputFile = new File(apkDir, dirname + ".apk");
-
-            if (variant.buildType.minifyEnabled) {
-                variant.assemble.doLast {
-                    copy {
-                        from variant.mappingFile
-                        into "${apkDir.absolutePath}"
-                        rename { String fileName ->
-                            "${dirname}_mapping.txt"
-                        }
-                    }
-                }
-            }
-        }
-    }
-
 }
 
 walle {
