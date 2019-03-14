@@ -33,7 +33,7 @@ elif [ "$build_type" = "Release" ];then
 fi
 
 mkdir -p ${root_path}/output/Build_${build_number}/bakApk
-cp ${root_path}/app/build/bakApk/app-* ${root_path}/output/Build_${build_number}/bakApk
+cp -R ${root_path}/app/build/bakApk/app-* ${root_path}/output/Build_${build_number}/bakApk
 
 if [ "$build_type" = "Patch" ];then
     cp -R ${root_path}/app/build/outputs/patch ${root_path}/output/Build_${build_number}
