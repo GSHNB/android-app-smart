@@ -63,8 +63,11 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 
 
 #retrofit2  混淆
--dontwarn javax.annotation.**
--dontwarn javax.inject.**
+-dontnote retrofit2.Platform
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+-keepattributes Exceptions
 # OkHttp3
 -dontwarn okhttp3.logging.**
 -keep class okhttp3.internal.**{*;}
