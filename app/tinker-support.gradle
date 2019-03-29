@@ -2,8 +2,9 @@ apply plugin: 'com.tencent.bugly.tinker-support'
 
 
 
-def rootPath=buildDir.getParentFile().getParentFile();
-def bakPath = file("${rootPath}/output/Build_22/bakApk/")
+def rootPath = buildDir.getParentFile().getParentFile();
+
+def bakPath = file("${rootPath}/output/Build_${BUILD_NUMBER}/bakApk")
 
 /**
  * 此处填写每次构建生成的基准包目录
@@ -14,6 +15,15 @@ def baseApkDir = "app-0314-15-52-08"
  * 对于插件各参数的详细解析请参考
  */
 tinkerSupport {
+
+/**
+ * 打补丁包时先将基准包拷贝到bakPath目录下打包完成Jenkins脚本会删除该目录，
+ * 打基准包时注释此代码
+ */
+//    copy {
+//        from file("${rootPath}/output/Build_296/bakApk")
+//        into file("${rootPath}/output/Build_${BUILD_NUMBER}/bakApk")
+//    }
 
     // 开启tinker-support插件，默认值true
     enable = true
@@ -42,7 +52,7 @@ tinkerSupport {
     tinkerId = APP_TINKER_ID
 
     // 构建多渠道补丁时使用
-     buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
+    buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
 
     // 是否启用加固模式，默认为false.(tinker-spport 1.0.7起支持）
     // isProtectedApp = true

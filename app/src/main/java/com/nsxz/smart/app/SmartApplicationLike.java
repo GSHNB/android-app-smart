@@ -9,6 +9,7 @@ import android.support.multidex.MultiDex;
 
 import com.meituan.android.walle.WalleChannelReader;
 import com.nsxz.smart.BuildConfig;
+import com.nsxz.smart.network.NetWorkManager;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.entry.DefaultApplicationLike;
@@ -25,10 +26,11 @@ public class SmartApplicationLike extends DefaultApplicationLike {
     @Override
     public void onCreate() {
         super.onCreate();
-        Bugly.setIsDevelopmentDevice(getApplication(),BuildConfig.DEBUG);
-        String channel= WalleChannelReader.getChannel(getApplication());
-        Bugly.setAppChannel(getApplication(),channel);
-        Bugly.init(getApplication(),Const.BUGLY_APPID, BuildConfig.DEBUG);
+        Bugly.setIsDevelopmentDevice(getApplication(), BuildConfig.DEBUG);
+        String channel = WalleChannelReader.getChannel(getApplication());
+        Bugly.setAppChannel(getApplication(), channel);
+        Bugly.init(getApplication(), Const.BUGLY_APPID, BuildConfig.DEBUG);
+        NetWorkManager.getInstance().init();
     }
 
     @Override
