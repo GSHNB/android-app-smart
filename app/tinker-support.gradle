@@ -1,10 +1,6 @@
 apply plugin: 'com.tencent.bugly.tinker-support'
 
-
-
-def rootPath = buildDir.getParentFile().getParentFile();
-
-def bakPath = file("${rootPath}/output/Build_${BUILD_NUMBER}/bakApk")
+def bakPath = file("${rootDir}/output/Build_${BUILD_NUMBER}/bakApk")
 
 /**
  * 此处填写每次构建生成的基准包目录
