@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.multidex.MultiDex;
 
 import com.meituan.android.walle.WalleChannelReader;
 import com.nsxz.smart.BuildConfig;
@@ -13,6 +12,8 @@ import com.nsxz.smart.network.NetWorkManager;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.entry.DefaultApplicationLike;
+
+import androidx.multidex.MultiDex;
 
 /**
  * Created by gaoshun on 2019/2/21.

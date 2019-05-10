@@ -2,8 +2,10 @@ package com.nsxz.smart.network.request;
 
 import com.nsxz.smart.bean.Aa;
 import com.nsxz.smart.bean.MallCateShell;
+import com.nsxz.smart.bean.User;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
@@ -16,4 +18,7 @@ public interface Request {
 
     @GET("data/福利/3/1")
     Observable<Aa> getMallCate();
+
+    @GET("da")
+    Call<User> getUser();
 }
