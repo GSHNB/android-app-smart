@@ -12,14 +12,14 @@ import android.widget.TextView;
 import com.nsxz.smart.R;
 
 import androidx.annotation.Nullable;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class FoldTextView extends LinearLayout {
-    @Bind(R.id.tvContent)
+    @BindView(R.id.tvContent)
     TextView tvContent;
-    @Bind(R.id.tvButton)
+    @BindView(R.id.tvButton)
     TextView tvButton;
 
     ValueAnimator foldAnim;

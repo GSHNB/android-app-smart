@@ -18,13 +18,13 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DoubleListView extends LinearLayout {
-    @Bind(R.id.rvItem)
+    @BindView(R.id.rvItem)
     RecyclerView rvItem;
-    @Bind(R.id.lvCate)
+    @BindView(R.id.lvCate)
     ListView lvCate;
 
     private CateTabSelectedCallback callback;

@@ -18,13 +18,14 @@ public class UploadWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-//        Looper.prepare();
-//        Toast.makeText(getApplicationContext(), "sdfa", Toast.LENGTH_SHORT).show();
-//        Looper.loop();
         Data data=getInputData();
         String uri=data.getString("");
         Log.i(getClass().getCanonicalName(),"sdfsd");
-
         return Result.success(data);
+    }
+
+    @Override
+    public void onStopped() {
+        super.onStopped();
     }
 }

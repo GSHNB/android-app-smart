@@ -1,19 +1,22 @@
 package com.nsxz.smart.repository;
 
+import com.nsxz.smart.app.AppExecutors;
 import com.nsxz.smart.db.dao.UserDao;
 import com.nsxz.smart.network.request.Request;
 
-import java.util.concurrent.Executor;
+import javax.inject.Singleton;
 
+
+@Singleton
 public class UserRepository {
     Request request;
-//    UserDao userDao;
-    Executor executor;
+    UserDao userDao;
+    AppExecutors executors;
 
-    public UserRepository(Request request, UserDao userDao, Executor executor) {
+    public UserRepository(Request request, UserDao userDao, AppExecutors executor) {
         this.request = request;
-//        this.userDao = userDao;
-        this.executor = executor;
+        this.userDao = userDao;
+        this.executors = executor;
     }
 
 //    public LiveData<User> getUser(int userID){
@@ -23,11 +26,6 @@ public class UserRepository {
 //    }
 
     private void refreshUser(final int userID){
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-//                boolean userExists =
-            }
-        });
+
     }
 }
