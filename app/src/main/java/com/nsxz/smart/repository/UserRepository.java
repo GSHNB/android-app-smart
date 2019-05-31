@@ -26,6 +26,26 @@ public class UserRepository {
 //    }
 
     private void refreshUser(final int userID){
-
+//        new NetworkBoundResounce<UserDao, UserDao>() {
+//            @Override
+//            protected void saveCallResult(UserDao item) {
+//
+//            }
+//
+//            @Override
+//            protected boolean shouldFetch(UserDao data) {
+//                return false;
+//            }
+//
+//            @Override
+//            protected LiveData<UserDao> loadFromDb() {
+//                return null;
+//            }
+//
+//            @Override
+//            protected LiveData<ApiResponse<UserDao>> createCall() {
+//                return null;
+//            }
+//        }
     }
 }

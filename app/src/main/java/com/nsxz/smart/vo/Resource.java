@@ -1,37 +1,34 @@
 package com.nsxz.smart.vo;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 public class Resource<T> {
-    private Status status;
+    @NonNull
+    public final Status status;
+    @Nullable
     private T data;
+    @Nullable
     private String message;
 
-    private Resource(Status status, T data, String message) {
+    private Resource(@NonNull Status status, @Nullable T data, @Nullable String message) {
         this.status = status;
         this.data = data;
         this.message = message;
     }
 
-    public static <T> Resource success(T data) {
+    public static <T> Resource<T> success(@NonNull T data) {
         return new Resource(Status.SUCCESS, data, null);
     }
 
-    public static <T> Resource error(String msg, T data) {
+    public static <T> Resource<T> error(String msg, @Nullable T data) {
         return new Resource(Status.ERROR, data, msg);
     }
 
-    public static <T> Resource loading(T data) {
+    public static <T> Resource<T> loading(@Nullable T data) {
         return new Resource(Status.LOADING, data, null);
     }
 
-    public Status getStatus() {
-        return status;
-    }
 
-    public T getData() {
-        return data;
-    }
-
-    public String getMessage() {
-        return message;
-    }
+    public enum Status {SUCCESS, ERROR, LOADING}
 }

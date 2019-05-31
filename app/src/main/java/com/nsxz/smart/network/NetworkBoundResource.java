@@ -9,13 +9,14 @@ import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
-public abstract class NetworkBoundResounce<ResultType, RequestType> {
+public abstract class NetworkBoundResource<ResultType, RequestType> {
     private AppExecutors appExecutors;
     private MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
 
     @MainThread
-    public NetworkBoundResounce(AppExecutors appExecutors) {
+    public NetworkBoundResource(AppExecutors appExecutors) {
         this.appExecutors = appExecutors;
+        init();
     }
 
     private void init() {
@@ -43,45 +44,38 @@ public abstract class NetworkBoundResounce<ResultType, RequestType> {
     }
 
     private void fetchFromNetwork(LiveData<ResultType> dbSource) {
-        LiveData<ApiResponse<ResultType>> apiResponse = createCall();
+        LiveData<ApiResponse<RequestType>> apiResponse = createCall();
         result.addSource(dbSource, newData -> setValue(Resource.loading(newData)));
         result.addSource(apiResponse, response -> {
             result.removeSource(apiResponse);
             result.removeSource(dbSource);
-            if (response instanceof ApiResponse) {
+
+            if (response.isSuccessful()) {
                 appExecutors.getDiskIO().execute(() -> {
-                    saveCallResult(processResponse());
+                    saveCallResult(processResponse(response));
                     appExecutors.getMainThread().execute(() ->
                             result.addSource(loadFromDb(),
                                     newData -> setValue(Resource.success(newData)))
                     );
                 });
-            }
-
-            if (false) {
-                appExecutors.getMainThread().execute(() ->
-                        result.addSource(loadFromDb(),
-                                newData -> setValue(Resource.success(newData)))
-                );
-            }
-
-            if (false) {
+            } else {
                 onFetchFailed();
-                result.addSource(dbSource, newData -> setValue(Resource.error("", newData)));
+                result.addSource(dbSource, newData -> setValue(Resource.error(response.errorMessage, newData)));
             }
         });
     }
 
-    protected void onFetchFailed() {}
-
-    public LiveData<Resource<ResultType>> asLiveData(){
+    public LiveData<Resource<ResultType>> getAsLiveData() {
         return result;
     }
 
+    @MainThread
+    protected void onFetchFailed() {
+    }
+
     @WorkerThread
-    protected RequestType processResponse() {
-        // TODO: 2019/5/23
-        return null;
+    protected RequestType processResponse(ApiResponse<RequestType> response) {
+        return response.body;
     }
 
     @WorkerThread
@@ -94,7 +88,7 @@ public abstract class NetworkBoundResounce<ResultType, RequestType> {
     protected abstract LiveData<ResultType> loadFromDb();
 
     @MainThread
-    protected abstract LiveData<ApiResponse<ResultType>> createCall();
+    protected abstract LiveData<ApiResponse<RequestType>> createCall();
 
 
 }
